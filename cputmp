@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "CPU Temperature is:" "$(sensors | awk '/^Package/ {print $4}')"

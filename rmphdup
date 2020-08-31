@@ -1,0 +1,48 @@
+#!/usr/bin/python
+from os import system
+import sys
+
+if not len(sys.argv) -1:
+    print("Usage: rmphdup [KEEP] [REMOVE]")
+    sys.exit(1)
+
+if sys.argv[1] == "--help" or sys.argv[1] == "-h":
+    print('''Usage: rmphdup [KEEP] [REMOVE]
+If 2 files exist with teh same name but different extensions the one with .[REMOVE] extension will be removed.
+e.g. when running rmphdup png jpg on photo1.png photo1.jpg photo2.png photo3.jpg, the result will be:
+    photo1.png photo2.png photo3.jpg
+
+  -t, --test            will output all of the rm commands that will be run
+
+  -h, --help            will bring up this message
+
+for bug reports email dkatz488@gmail.com''')
+
+
+
+testing = False
+if "--test" in sys.argv:
+    testing= True
+    del sys.argv[sys.argv.index("--test")]
+
+elif "-t" in sys.argv:
+    testing= True
+    del sys.argv[sys.argv.index("-t")]
+
+if not len(sys.argv) == 3:
+    print("Usage: rmphdup [KEEP] [REMOVE]")
+    sys.exit(1)
+
+if testing:
+    system('for f in *.' + sys.argv[2] + '; do   [ -e "${f%.*}.' + sys.argv[1] + '" ] && echo rm -- "$f"; done')
+    sys.exit(0)
+
+
+if not testing:
+    system('for f in *.' + sys.argv[2] + '; do   [ -e "${f%.*}.' + sys.argv[1] + '" ] && rm -- "$f"; done')
+    sys.exit(0)
+
+sys.exit("Oh god what happened????")
+
+
+
