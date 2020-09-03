@@ -1,0 +1,9 @@
+#!/bin/sh
+out=("")
+for i in $(ls -pA | grep -v / | tr '\n' ' ')
+do
+    out+="$(head -n 1 $i | awk -F"/" '/#!/ {print $NF}')\t${i}\n"
+
+done
+
+printf "$(printf "$out" | sort | sed 's/^\t/--\t/')\n"
