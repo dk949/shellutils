@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Glorious docuemntation because there is no way i'll remember how this works
 # Loop iterates over 20 connections, if there are more, they will not get processed
@@ -23,18 +23,17 @@
 
 
 
-for i in {2..20}
+for i in 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 do
 
     NET="$(nmcli device wifi | cut -c28- | sed -n "$i p")"
     NET="${NET%%  *}"
-
-    if [[ -f /etc/NetworkManager/system-connections/\'"$NET".passwd\' ]]
+    if [ -f /etc/NetworkManager/system-connections/\'"$NET".passwd\' ]
     then
 
         sudo nmcli connection up "$NET" passwd-file /etc/NetworkManager/system-connections/\'"$NET".passwd\' && break
 
-    elif [[ -f /etc/NetworkManager/system-connections/"$NET".passwd ]]
+    elif [ -f /etc/NetworkManager/system-connections/"$NET".passwd ]
     then
 
         sudo nmcli connection up "$NET" passwd-file /etc/NetworkManager/system-connections/"$NET".passwd && break
