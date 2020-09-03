@@ -1,6 +1,10 @@
-#!/bin/bash
-CURRENT=$PWD
-cd "$1" || echo "$1" is not a directory && exit
-"${@:2}"
+#!/bin/sh
 
+failMsg(){
+    echo no directory "$1"
+    exit 1
+}
+CURRENT=$PWD
+cd "$1" 2>/dev/null || failMsg "$@"
+eval "$(echo "$@" | sed 's/[\/\.\_a-zA-Z0-9\-]* \(.*\)/\1/')"
 cd "$CURRENT" || echo soemthing went veryvery wrong && exit

@@ -1,6 +1,4 @@
-#!/bin/bash
-from=$1  #  Find files that have names like something.text
-to=$2    #  Change the .text suffix to .txt
-
-find . -type f -name "*.$from" -exec sh -c 'mv "$3" "${3%.$1}.$2"' sh "$from" "$to" {} ';'
-
+#!/bin/sh
+FROM=$1  #  Find files that have names like something.text
+TO=$2    #  Change the .text suffix TO .txt
+find . -type f -name "*.$FROM" -exec sh -c 'mv "$3" "${3%.$1}.$2"' sh "$FROM" "$TO" {} ';'
