@@ -6,4 +6,4 @@ do
 
 done
 
-printf "$(printf "$out" | sort | sed 's/^\t/--\t/')\n"
+printf "$(printf "$out" | sort | sed 's/^\t/0\t/')\n"
