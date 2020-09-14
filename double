@@ -1,0 +1,37 @@
+#!/usr/bin/dash
+
+if [ -n "$TERM" ]; then
+    T="$TERM"
+elif [ -n "$TERMINAL" ]; then
+    T="$TERMINAL"
+elif command -v  xterm 1,2> /dev/null; then
+    T="xterm"
+elif command -v  urxvt 1,2> /dev/null; then
+    T="urxvt"
+else
+    echo "Could not detect Terminal, try exporting TERM or TERMINAL env variables"
+fi
+
+case $T in
+    urxvt)
+        CMD="-cd"
+        ;;
+    alacritty|gnome-terminal|xfce4-terminal|terminator)
+        CMD="--working-directory"
+        ;;
+    konsole)
+        CMD="--workdir"
+        ;;
+    xterm)
+        echo "If xterm supports launching to a specific directory please let me know"
+        exit 1
+        ;;
+
+    *) echo "Oh noh"
+        ;;
+esac
+
+set +m
+eval nohup "$T" "$CMD" "$1" 1>/dev/null 2>/dev/null </dev/null  &
+clear
+cd "$1" || exit 1
