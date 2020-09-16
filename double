@@ -1,4 +1,4 @@
-#!/usr/bin/dash
+#!/bin/sh
 
 if [ -n "$TERM" ]; then
     T="$TERM"
@@ -33,5 +33,5 @@ esac
 
 set +m
 eval nohup "$T" "$CMD" "$1" 1>/dev/null 2>/dev/null </dev/null  &
-clear
-cd "$1" || exit 1
+eval nohup "$T" "$CMD" "$1" 1>/dev/null 2>/dev/null </dev/null  &
+kill "$(awk '{print $4}' "/proc/$PPID/stat")"
