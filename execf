@@ -7,4 +7,12 @@ failMsg(){
 CURRENT=$PWD
 cd "$1" 2>/dev/null || failMsg "$@"
 eval "$(echo "$@" | sed 's/[\/\.\_a-zA-Z0-9\-]* \(.*\)/\1/')"
-cd "$CURRENT" || echo soemthing went veryvery wrong && exit
+
+if cd "$CURRENT"
+then
+    exit 0
+else
+    echo soemthing went very very wrong
+    exit 1
+fi
+
