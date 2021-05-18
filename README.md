@@ -16,11 +16,11 @@ Set of shell scripts I use. All scripts are written in POSIX shell and should be
 * update-grub - works like it does on ubuntu. Run (as root) after tweaking /etc/default/grub.
 * wminfo - lifted from the suckless dwm documentation, [rules](https://dwm.suckless.org/customisation/rules/) section. Requires xprop and prints the basic information about the next window you click on in a human readable format. This information is often required by standalone window managers (and even some desktop environments.)
 
-
 ### Installation
 ```
-git clone https://github.com/dk949/shellutils
+git clone https://github.com/dk949/shellutils/
 cd shellutils
-./install
+make install
 ```
-Note: This is the default method and it assumes that ~/bin exists, is in PATH and does not contain files named the same as files in this repo (if there are they will be removed). If you wish to install to a different drectory simply change the cd ~/bin portion of the install file to your desired directory.
+Note: This is the default method and it assumes that $HOME/.local/bin  exists (it will be created if not) and is on PATH. If you wish to install to a different directory change `DESTDIR` and/or `PREFIX` variables in config.mk.
+
