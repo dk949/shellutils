@@ -19,6 +19,7 @@ install: all
 	install run ${DESTDIR}${PREFIX}/bin/run
 	install update-grub ${DESTDIR}${PREFIX}/bin/update-grub
 	install wminfo ${DESTDIR}${PREFIX}/bin/wminfo
+	install ctfix ${DESTDIR}${PREFIX}/bin/ctfix
 
 
 uninstall:
@@ -36,5 +37,6 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/run
 	rm -f ${DESTDIR}${PREFIX}/bin/update-grub
 	rm -f ${DESTDIR}${PREFIX}/bin/wminfo
+	rm -f ${DESTDIR}${PREFIX}/bin/ctfix
 
 .PHONY: all clean install uninstall
