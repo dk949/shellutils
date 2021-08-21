@@ -1,12 +1,16 @@
 include config.mk
 
-all: floatdump
+all: floatdump colorcheck
 
 clean:
 	rm -f floatdump
+	rm -f colorcheck
 
 floatdump: floatdump.cpp
 	g++ -o floatdump floatdump.cpp -std=c++20 -O3 -DVERSION=$(FLOATDUMP_VERSION)
+
+colorcheck: colorcheck.cpp
+	g++ -o colorcheck colorcheck.cpp -O3 -DVERSION=$(COLORCHECK_VERSION)
 
 
 install: all
