@@ -20,6 +20,7 @@ install: all
 	install update-grub ${DESTDIR}${PREFIX}/bin/update-grub
 	install wminfo ${DESTDIR}${PREFIX}/bin/wminfo
 	install ctfix ${DESTDIR}${PREFIX}/bin/ctfix
+	install wcat ${DESTDIR}${PREFIX}/bin/wcat
 
 
 uninstall:
@@ -38,5 +39,6 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/update-grub
 	rm -f ${DESTDIR}${PREFIX}/bin/wminfo
 	rm -f ${DESTDIR}${PREFIX}/bin/ctfix
+	rm -f ${DESTDIR}${PREFIX}/bin/wcat
 
 .PHONY: all clean install uninstall
