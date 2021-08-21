@@ -1,5 +1,32 @@
-# shellutils
-Set of shell scripts I use. All scripts are written in POSIX shell and should be fairly portable.
+#shellutils
+Some shell utility scripts. All scripts are written in either POSIX shell or c++ and so should be fairly portable.
+
+Note: make will strip extensions when installing to executables will not have `.sh` or `.out` at the end
+
+### Requirements
+* shell
+    * tested on bash, dash and zsh
+    * needed for `*.sh`
+* make
+    * needed for everything
+* c++ compiler with support for c++ 20
+    * tested with gcc 11.1
+    * if you have a c++ compiler that is not `/usr/bin/c++`, you can specify `CC` macro in `config.mk`
+    * needed for `*.cpp`
+* clang-tidy
+    * needed for `ctfix.sh`
+* gpg, tar
+    * needed for `decryptdir.sh` and `encryptdir.sh`
+* curl
+    * needed for `dict.sh`
+* supported terminal
+    * needed for `double.sh`
+    * see [double](#double) for details
+* grub
+    * needed for `update-grub.sh`
+* xprop
+    * needed for `wminfo.sh`
+
 ### List of Scripts and what they do
 #### bak
 * creates a backup of the file (or directory) passed to it as the first argument.
@@ -68,7 +95,6 @@ Set of shell scripts I use. All scripts are written in POSIX shell and should be
 #### lstype
 * lists regular files in the current directry (not recursively) with their filetypes as deduced from the shebang.
 * 0 if shebang is not supplied.
-* note: this one uses some bash only functionality, so it requires bash.
 
 #### out
 * takes tty number as the first argument and a command as the second.
@@ -108,4 +134,3 @@ cd shellutils
 make install
 ```
 Note: This is the default method and it assumes that $HOME/.local/bin  exists (it will be created if not) and is on PATH. If you wish to install to a different directory change `DESTDIR` and/or `PREFIX` variables in config.mk.
-
