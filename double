@@ -1,17 +1,16 @@
 #!/bin/sh
 
-if [ -n "$TERM" ]; then
-    T="$TERM"
-elif [ -n "$TERMINAL" ]; then
-    T="$TERMINAL"
-elif command -v  xterm 1,2> /dev/null; then
-    T="xterm"
-elif command -v  urxvt 1,2> /dev/null; then
-    T="urxvt"
-else
-    echo "Could not detect Terminal, try exporting TERM or TERMINAL env variables"
+if [ $# -ne 1 ]; then
+    echo "Usage $) DIR"
+    exit 1
+fi
+if ! [ -d "$1" ]; then
+    echo "$1 is not a directory"
+    exit 1
 fi
 
+
+T="$(awk '{print $2}' "/proc/$PPID/stat" | sed 's/(\|)//g')"
 case $T in
     urxvt)
         CMD="-cd"
@@ -22,12 +21,17 @@ case $T in
     konsole)
         CMD="--workdir"
         ;;
-    xterm)
-        echo "If xterm supports launching to a specific directory please let me know"
+    kitty)
+        CMD="--directory"
+        ;;
+    xterm|st)
+        echo "If $T supports launching to a specific directory please let me know"
         exit 1
         ;;
 
-    *) echo "Oh noh"
+    *)
+        echo "Unsupported terminal $T"
+        CMD="--working-directory" # this is most likely to work
         ;;
 esac
 

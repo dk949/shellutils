@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# TODO: this needs a rework
 helpText() {
 	printf "Usage: rmphdup [TEST] KEEP REMOVE
 

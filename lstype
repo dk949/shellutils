@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# TODO: this one needs a big overhaul or scrapping
 out=("")
 for i in $(ls -pA | grep -v / | tr '\n' ' ')
 do
