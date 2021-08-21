@@ -15,26 +15,11 @@ colorcheck: colorcheck.cpp
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin/
 	$(foreach file, $(wildcard *.sh), install $(file) ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
-	#for i in *.out; do install $$i ${DESTDIR}${PREFIX}/bin/$(basename $$i); done
+	$(foreach file, $(wildcard *.out), install $(file) ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
 
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/bak
-	rm -f ${DESTDIR}${PREFIX}/bin/colorcheck
-	rm -f ${DESTDIR}${PREFIX}/bin/decriptdir
-	rm -f ${DESTDIR}${PREFIX}/bin/dict
-	rm -f ${DESTDIR}${PREFIX}/bin/double
-	rm -f ${DESTDIR}${PREFIX}/bin/encriptdir
-	rm -f ${DESTDIR}${PREFIX}/bin/execf
-	rm -f ${DESTDIR}${PREFIX}/bin/extrename
-	rm -f ${DESTDIR}${PREFIX}/bin/lstype
-	rm -f ${DESTDIR}${PREFIX}/bin/out
-	rm -f ${DESTDIR}${PREFIX}/bin/rmphdup
-	rm -f ${DESTDIR}${PREFIX}/bin/run
-	rm -f ${DESTDIR}${PREFIX}/bin/update-grub
-	rm -f ${DESTDIR}${PREFIX}/bin/wminfo
-	rm -f ${DESTDIR}${PREFIX}/bin/ctfix
-	rm -f ${DESTDIR}${PREFIX}/bin/wcat
-	rm -f ${DESTDIR}${PREFIX}/bin/floatdump
+	$(foreach file, $(wildcard *.sh), rm -f ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
+	$(foreach file, $(wildcard *.out), rm -f ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
 
 
 .PHONY: all clean install uninstall
