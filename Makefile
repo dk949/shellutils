@@ -1,16 +1,21 @@
 include config.mk
 
-all: floatdump colorcheck
+all: floatdump.out colorcheck.out lstype.out
 
 clean:
 	rm -f floatdump.out
 	rm -f colorcheck.out
 
-floatdump: floatdump.cpp
+floatdump.out: floatdump.cpp
 	g++ -o floatdump.out floatdump.cpp -std=c++20 -O3 -DVERSION=$(FLOATDUMP_VERSION)
 
-colorcheck: colorcheck.cpp
+colorcheck.out: colorcheck.cpp
 	g++ -o colorcheck.out colorcheck.cpp -O3 -DVERSION=$(COLORCHECK_VERSION)
+
+lstype.out: lstype.cpp
+	g++ -o lstype.out lstype.cpp -std=c++20 -O3 -DVERSION=$(LSTYPE_VERSION)
+
+
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin/
