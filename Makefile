@@ -1,7 +1,13 @@
 include config.mk
-all:
+
+all: floatdump
 
 clean:
+	rm -f floatdump
+
+floatdump: floatdump.cpp
+	g++ -o floatdump floatdump.cpp -std=c++20 -O3 -DVERSION=$(FLOATDUMP_VERSION)
+
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin/
@@ -21,6 +27,7 @@ install: all
 	install wminfo ${DESTDIR}${PREFIX}/bin/wminfo
 	install ctfix ${DESTDIR}${PREFIX}/bin/ctfix
 	install wcat ${DESTDIR}${PREFIX}/bin/wcat
+	install floatdump ${DESTDIR}${PREFIX}/bin/floatdump
 
 
 uninstall:
@@ -40,5 +47,7 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/wminfo
 	rm -f ${DESTDIR}${PREFIX}/bin/ctfix
 	rm -f ${DESTDIR}${PREFIX}/bin/wcat
+	rm -f ${DESTDIR}${PREFIX}/bin/floatdump
+
 
 .PHONY: all clean install uninstall
