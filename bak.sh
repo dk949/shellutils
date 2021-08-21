@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ $# = 1 ]; then
+if [ $# -ne 1 ]; then
     echo "Usage: $0 FILE"
     exit 1
 fi
