@@ -25,7 +25,7 @@ install: all
 
 uninstall:
 	$(foreach file, $(wildcard *.sh), rm -f ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
-	$(foreach file, $(wildcard *.out), rm -f ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
+	$(foreach file, $(wildcard *.cpp), rm -f ${DESTDIR}${PREFIX}/bin/$(basename $(file));)
 
 
 .PHONY: all clean install uninstall
