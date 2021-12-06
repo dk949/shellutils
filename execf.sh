@@ -1,9 +1,9 @@
 #!/bin/sh
-if [ $# -ne 1 ]; then
-    echo "Usage $0 DIR"
+if [ $# -lt 1 ]; then
+    echo "Usage $0 DIR CMD"
     exit 1
 fi
-if ! [ -d "$!" ]; then
+if ! [ -d "$1" ]; then
     echo "$0: no such directory $1"
     exit 1
 fi
