@@ -19,9 +19,6 @@ Note: make will strip extensions when installing to executables will not have `.
     * needed for `decryptdir.sh` and `encryptdir.sh`
 * curl
     * needed for `dict.sh`
-* supported terminal
-    * needed for `double.sh`
-    * see [double](#double) for details
 * grub
     * needed for `update-grub.sh`
 * xprop
@@ -50,22 +47,7 @@ Note: make will strip extensions when installing to executables will not have `.
 
 #### double
 * takes 1 argument.
-* closes the current terminal then opens 2 new terminals to the directory specified by the argument
-* supported terminals:
-    * alacritty
-    * gnome-terminal
-    * kitty
-    * konsole
-    * terminator
-    * urxvt
-    * xfce4-terminal
-* unsupported terminals:
-    * xterm
-    * st
-* Maybe supported:
-    * these are the only ones that have explicit support.
-    * program will try to run on any terminal that is not explicitly unsupported
-    * it might work
+* closes the current terminal then opens 2 new terminals to the directory specified by the argument.
 
 #### encryptdir
 * creates a tarball from the directory
