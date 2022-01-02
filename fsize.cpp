@@ -42,8 +42,8 @@ void printReadable(double fsize, double bytesPerKB) {
 
 
 int main(int, char **argv) try {
-    auto busage = [argv]() { return usage(argv[0]); };
-    auto bversion = [argv]() { return version(argv[0]); };
+    const auto busage = [argv]() { return usage(argv[0]); };
+    const auto bversion = [argv]() { return version(argv[0]); };
     bool readable = false;
     bool filename = false;
     bool ignoreDash = false;
