@@ -1,6 +1,6 @@
 include config.mk
 
-all: floatdump.out colorcheck.out lstype.out
+all: floatdump.out colorcheck.out lstype.out fsize.out
 
 clean:
 	rm -f floatdump.out
@@ -15,6 +15,9 @@ colorcheck.out: colorcheck.cpp
 
 lstype.out: lstype.cpp
 	$(CC) -o lstype.out lstype.cpp -std=c++20 -O3 -DVERSION=$(LSTYPE_VERSION)
+
+fsize.out: fsize.cpp
+	$(CC) -o fsize.out fsize.cpp -std=c++20 -O3 -DVERSION=$(FSIZE_VERSION)
 
 
 
