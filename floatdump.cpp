@@ -13,7 +13,10 @@ static_assert(sizeof(float) == 4, "expected 32 bit float");
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <span>
+
+#ifndef VERSION
+#define VERSION "unknonw"
+#endif
 
 int version(const char *argv0) {
     std::cout << argv0 << ": v" VERSION << '\n';
@@ -72,7 +75,6 @@ void printNum(const std::string &input, int precision, bool sci, int numPerLine,
 
 enum class Type { Float, Int, Uint };
 int main(int argc, const char **argv) {
-    std::span<const char *> args {std::next(argv), static_cast<size_t>(argc - 1)};
     int precision = 7;
     bool sci = true;
     int numPerLine = 4;
@@ -80,8 +82,9 @@ int main(int argc, const char **argv) {
     Type type = Type::Float;
     int bytes = 4;
     const char *fileName = nullptr;
-    for (auto argIt = std::begin(args); argIt != std::end(args); argIt++) {
-        const auto &arg = *argIt;
+    const auto busage = [argv]() { return usage(argv[0]); };
+    const auto bversion = [argv]() { return version(argv[0]); };
+    for (const char *arg = *(++argv); arg; arg = *(++argv)) {
         if (std::strcmp(arg, "-b") == 0)
             big = true;
         else if (std::strcmp(arg, "-l") == 0)
@@ -97,31 +100,31 @@ int main(int argc, const char **argv) {
         else if (std::strcmp(arg, "-uint") == 0)
             type = Type::Uint;
         else if (std::strcmp(arg, "-h") == 0)
-            return usage(argv[0]);
+            return busage();
         if (std::strcmp(arg, "-v") == 0)
-            return version(argv[0]);
+            return bversion();
         if (std::strcmp(arg, "-n") == 0) {
-            if (++argIt == std::end(args)) {
-                std::cerr << "not enough arguments for option -n. try " << argv[0] << " -h for help\n";
+            if (*(++argv) == nullptr) {
+                std::cerr << "not enough arguments for option -n. try `-h` for help\n";
                 return 1;
             }
-            numPerLine = std::atoi(*argIt);
+            numPerLine = std::atoi(*argv);
             if (numPerLine < 1) {
                 std::cerr << "number of lines has to be greater then 0\n";
                 return 1;
             }
         } else if (std::strcmp(arg, "-p") == 0) {
-            if (++argIt == std::end(args)) {
-                std::cerr << "not enough arguments for option -p. try " << argv[0] << " -h for help\n";
+            if (*(++argv) == nullptr) {
+                std::cerr << "not enough arguments for option -p. try `-h` for help\n";
                 return 1;
             }
-            precision = std::atoi(*argIt);
+            precision = std::atoi(*argv);
         } else if (std::strcmp(arg, "-bytes") == 0) {
-            if (++argIt == std::end(args)) {
-                std::cerr << "not enough arguments for option -bytes. try " << argv[0] << " -h for help\n";
+            if (*(++argv) == nullptr) {
+                std::cerr << "not enough arguments for option -bytes. try `-h` for help\n";
                 return 1;
             }
-            bytes = std::atoi(*argIt);
+            bytes = std::atoi(*argv);
         } else {
             fileName = arg;
         }
