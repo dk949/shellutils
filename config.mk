@@ -11,3 +11,4 @@ PREFIX=
 
 # compiler
 CC=/usr/bin/c++
+STRP=/usr/bin/strip

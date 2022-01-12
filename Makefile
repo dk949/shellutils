@@ -7,17 +7,22 @@ clean:
 	rm -f colorcheck.out
 	rm -f lstype.out
 
+
 floatdump.out: floatdump.cpp
 	$(CC) -o floatdump.out floatdump.cpp -std=c++20 -O3 -DVERSION=$(FLOATDUMP_VERSION)
+	$(STRP) floatdump.out
 
 colorcheck.out: colorcheck.cpp
 	$(CC) -o colorcheck.out colorcheck.cpp -std=c++20 -O3 -DVERSION=$(COLORCHECK_VERSION)
+	$(STRP) colorcheck.out
 
 lstype.out: lstype.cpp
 	$(CC) -o lstype.out lstype.cpp -std=c++20 -O3 -DVERSION=$(LSTYPE_VERSION)
+	$(STRP) lstype.out
 
 fsize.out: fsize.cpp
 	$(CC) -o fsize.out fsize.cpp -std=c++20 -O3 -DVERSION=$(FSIZE_VERSION)
+	$(STRP) fsize.out
 
 
 
