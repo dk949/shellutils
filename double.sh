@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ $# -ne 1 ]; then
-    echo "Usage $) DIR"
+    echo "Usage $(basename $0) DIR"
     exit 1
 fi
 if ! [ -d "$1" ]; then

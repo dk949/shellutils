@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $# -lt 1 ]; then
-    echo "Usage: $0 EXE [EXE...]"
+    echo "Usage: $(basename $0) EXE [EXE]..."
     exit 1
 fi
 
