@@ -5,7 +5,7 @@ LSTYPE_VERSION=\"1.1.0\"
 FSIZE_VERSION=\"1.2.1\"
 
 # dirs
-DESTDIR=${HOME}/.local
+DESTDIR=$(HOME)/.local
 PREFIX=
 
 
