@@ -134,6 +134,11 @@ Note: make will strip extensions when installing to executables will not have
   filetypes as deduced from the shebang.
 * 0 if shebang is not supplied.
 
+#### mkfile
+
+* takes a path and creates an empty file at that location
+* creates all intermediate directories if they don't exist
+
 #### out
 
 * takes tty number as the first argument and a command as the second.
