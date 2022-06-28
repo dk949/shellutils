@@ -106,6 +106,28 @@ Note: make will strip extensions when installing to executables will not have
 * prints their sizes in bytes
 * see `fsize -h` for more options
 
+#### license
+
+* takes the name of a license, one of:
+  * AGPL-3.0
+  * Apache-2.0
+  * BSD-2-Clause
+  * BSD-3-Clause
+  * BSL-1.0
+  * CC0-1.0
+  * EPL-2.0
+  * GPL-2.0
+  * GPL-3.0
+  * LGPL-2.1
+  * MIT
+  * MPL-2.0
+  * Unlicense
+* copies said license to the LICENSE file in the current directory
+* if a license requires copyright year to be specified (e.g. MIT), it will be
+  fetched with the unix `date` command
+* if a license requires author's name, it will first be taken from git's
+  user.name or, if that fails, from `$USER`
+
 #### lstype
 
 * lists regular files in the current directry (not recursively) with their
@@ -123,7 +145,7 @@ Note: make will strip extensions when installing to executables will not have
 * remove extension duplicates.
 * finds files with the same name, but different extension
 * removes all files with the unwanted extension.
-* takes 2 arguments with an optional -t\\\\\|--test flag.
+* takes 2 arguments with an optional `-t|--test` flag.
   * first argument is the extension to keep (without the dot)
   * the second one is extension to remove.
   * -t or --test will not remove any files, instead it will print all of the rm
