@@ -39,9 +39,19 @@ Note: make will strip extensions when installing to executables will not have
   argument.
 * backed up file is called `ORIGINAL_NAME.bak`
 
+
+#### cleanlatex
+
+* removes `aux` `bcf` and `log` files produced by pdflatex for a specific target
+* can remove the pdf too
+
 #### colorcheck
 
 * checks color capabilities of a terminal by printing all colors
+
+#### cpdir
+
+* copy directory structure without the files
 
 #### ctfix
 
