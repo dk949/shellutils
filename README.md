@@ -39,7 +39,6 @@ Note: make will strip extensions when installing to executables will not have
   argument.
 * backed up file is called `ORIGINAL_NAME.bak`
 
-
 #### cleanlatex
 
 * removes `aux` `bcf` and `log` files produced by pdflatex for a specific target
@@ -78,6 +77,15 @@ Note: make will strip extensions when installing to executables will not have
 
 * creates a tarball from the directory
 * encrypts the tarball, deletes the tar ball and the original directory.
+
+#### envdump
+
+* Prints all environment variables to stdout
+* By default the format is VARIABLE=VALUE\\n
+  * Note: VALUE can be empty
+* NULL can be used to separate variables instead of newline with `-0`
+* Comma (,) can be used to separate VARIABLE and VALUE with `-c` (or use with
+  csv)
 
 #### execf
 
