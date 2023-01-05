@@ -15,14 +15,15 @@ static_assert(sizeof(float) == 4, "expected 32 bit float");
 #include <iostream>
 
 #ifndef VERSION
-#define VERSION "unknonw"
+#    define VERSION "unknonw"
 #endif
 
-int version(const char *argv0) {
+int version(char const *argv0) {
     std::cout << argv0 << ": v" VERSION << '\n';
     return 0;
 }
-int usage(const char *argv0) {
+
+int usage(char const *argv0) {
     std::cout << "Usage: " << argv0 << " [OPTIONS...] [FILE]\n"
               <<
         R"(
@@ -56,15 +57,17 @@ return values
 }
 
 template<typename Num>
-void printNum(const std::string &input, int precision, bool sci, int numPerLine, bool big) {
+void printNum(std::string const &input, int precision, bool sci, int numPerLine, bool big) {
     static int count = 0;
     static int charNum = 0;
     constexpr int size = sizeof(Num);
+
     static union {
         Num n;
         char c[sizeof(Num)];
     } u;
-    for (const auto ch : input) {
+
+    for (auto const ch : input) {
         u.c[(big ? (size - 1) : 0) - (charNum++ % size) * (big ? 1 : -1)] = ch;
         if (charNum > (size - 1) && charNum % size == 0) {
             std::cout << (sci ? std::scientific : std::fixed) << std::setprecision(precision) << u.n
@@ -74,17 +77,22 @@ void printNum(const std::string &input, int precision, bool sci, int numPerLine,
 }
 
 enum class Type { Float, Int, Uint };
-int main(int argc, const char **argv) {
+
+int main(int argc, char const **argv) {
     int precision = 7;
     bool sci = true;
     int numPerLine = 4;
     bool big = false;
     Type type = Type::Float;
     int bytes = 4;
-    const char *fileName = nullptr;
-    const auto busage = [argv]() { return usage(argv[0]); };
-    const auto bversion = [argv]() { return version(argv[0]); };
-    for (const char *arg = *(++argv); arg; arg = *(++argv)) {
+    char const *fileName = nullptr;
+    auto const busage = [argv]() {
+        return usage(argv[0]);
+    };
+    auto const bversion = [argv]() {
+        return version(argv[0]);
+    };
+    for (char const *arg = *(++argv); arg; arg = *(++argv)) {
         if (std::strcmp(arg, "-b") == 0)
             big = true;
         else if (std::strcmp(arg, "-l") == 0)
@@ -101,8 +109,7 @@ int main(int argc, const char **argv) {
             type = Type::Uint;
         else if (std::strcmp(arg, "-h") == 0)
             return busage();
-        if (std::strcmp(arg, "-v") == 0)
-            return bversion();
+        if (std::strcmp(arg, "-v") == 0) return bversion();
         if (std::strcmp(arg, "-n") == 0) {
             if (*(++argv) == nullptr) {
                 std::cerr << "not enough arguments for option -n. try `-h` for help\n";
@@ -135,51 +142,27 @@ int main(int argc, const char **argv) {
     while (useFile ? file >> input : std::cin >> input) {
         if (type == Type::Float) {
             switch (bytes) {
-                case 4:
-                    printNum<float>(input, precision, sci, numPerLine, big);
-                    break;
-                case 8:
-                    printNum<double>(input, precision, sci, numPerLine, big);
-                    break;
-                case 16:
-                    printNum<long double>(input, precision, sci, numPerLine, big);
-                    break;
-                default:
-                    std::cerr << "unsupported floating point number with " << bytes << " bytes\n";
-                    return 2;
+                case 4: printNum<float>(input, precision, sci, numPerLine, big); break;
+                case 8: printNum<double>(input, precision, sci, numPerLine, big); break;
+                case 16: printNum<long double>(input, precision, sci, numPerLine, big); break;
+                default: std::cerr << "unsupported floating point number with " << bytes << " bytes\n"; return 2;
             }
         } else if (type == Type::Int) {
             switch (bytes) {
-                case 1:
-                    printNum<char>(input, precision, sci, numPerLine, big);
-                    break;
-                case 2:
-                    printNum<short>(input, precision, sci, numPerLine, big);
-                    break;
-                case 4:
-                    printNum<int>(input, precision, sci, numPerLine, big);
-                    break;
-                case 8:
-                    printNum<long>(input, precision, sci, numPerLine, big);
-                    break;
-                default:
-                    std::cerr << "unsupported integer number with " << bytes << " bytes\n";
-                    return 2;
+                case 1: printNum<char>(input, precision, sci, numPerLine, big); break;
+                case 2: printNum<short>(input, precision, sci, numPerLine, big); break;
+                case 4: printNum<int>(input, precision, sci, numPerLine, big); break;
+                case 8: printNum<long>(input, precision, sci, numPerLine, big); break;
+                default: std::cerr << "unsupported integer number with " << bytes << " bytes\n"; return 2;
             }
 
         } else {
             switch (bytes) {
-                case 1:
-                    printNum<unsigned char>(input, precision, sci, numPerLine, big);
-                case 2:
-                    printNum<unsigned short>(input, precision, sci, numPerLine, big);
-                case 4:
-                    printNum<unsigned int>(input, precision, sci, numPerLine, big);
-                case 8:
-                    printNum<unsigned long>(input, precision, sci, numPerLine, big);
-                default:
-                    std::cerr << "unsupported integer number with " << bytes << " bytes\n";
-                    return 2;
+                case 1: printNum<unsigned char>(input, precision, sci, numPerLine, big);
+                case 2: printNum<unsigned short>(input, precision, sci, numPerLine, big);
+                case 4: printNum<unsigned int>(input, precision, sci, numPerLine, big);
+                case 8: printNum<unsigned long>(input, precision, sci, numPerLine, big);
+                default: std::cerr << "unsupported integer number with " << bytes << " bytes\n"; return 2;
             }
         }
     }

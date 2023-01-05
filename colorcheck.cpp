@@ -1,10 +1,11 @@
+#include <stdlib.h>
+
 #include <array>
 #include <cstring>
 #include <iostream>
-#include <stdlib.h>
 
 #ifndef VERSION
-#define VERSION "unknonw"
+#    define VERSION "unknonw"
 #endif
 
 constexpr std::array toStr = []() {
@@ -30,7 +31,7 @@ constinit std::array buf = []() {
     return ret;
 }();
 
-int main(int argc, const char **argv) {
+int main(int argc, char const **argv) {
     if (argc != 1) {
         if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'v') {
             std::cout << argv[0] << ": v" VERSION << '\n';

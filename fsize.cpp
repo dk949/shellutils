@@ -1,18 +1,20 @@
+#include <string_view>
+
 #include <cmath>
 #include <filesystem>
 #include <iostream>
-#include <string_view>
 #include <vector>
 
 #ifndef VERSION
-#define VERSION "unknonw"
+#    define VERSION "unknonw"
 #endif
 
-int version(const char *argv0) {
+int version(char const *argv0) {
     std::cout << argv0 << ": v" VERSION << '\n';
     return 0;
 }
-int usage(const char *argv0) {
+
+int usage(char const *argv0) {
     std::cout << "Usage: " << argv0 << " [OPTIONS...] FILE [FILE...]\n"
               <<
         R"(
@@ -33,38 +35,32 @@ return values
     return 0;
 }
 
-
 void printReadable(double fsize, double bytesPerKB) {
     int i = 0;
-    for (; fsize >= bytesPerKB; fsize /= bytesPerKB, ++i) {}
+    for (; fsize >= bytesPerKB; fsize /= bytesPerKB, ++i) { }
     std::cout << std::ceil(fsize * 10.) / 10. << "BKMGTPE"[i];
 }
 
-
 int main(int, char **argv) try {
-    const auto busage = [argv]() { return usage(argv[0]); };
-    const auto bversion = [argv]() { return version(argv[0]); };
+    auto const busage = [argv]() {
+        return usage(argv[0]);
+    };
+    auto const bversion = [argv]() {
+        return version(argv[0]);
+    };
     bool readable = false;
     bool filename = false;
     bool ignoreDash = false;
     double bytesPerKB = 1024;
     std::vector<std::string_view> files;
-    for (const char *arg = *(++argv); arg; arg = *(++argv)) {
+    for (char const *arg = *(++argv); arg; arg = *(++argv)) {
         if (arg[0] == '-' && !ignoreDash) {
             switch (arg[1]) {
-                case 'h':
-                    return busage();
-                case 'v':
-                    return bversion();
-                case 'r':
-                    readable = true;
-                    break;
-                case 'n':
-                    filename = true;
-                    break;
-                case 'k':
-                    bytesPerKB = 1000;
-                    break;
+                case 'h': return busage();
+                case 'v': return bversion();
+                case 'r': readable = true; break;
+                case 'n': filename = true; break;
+                case 'k': bytesPerKB = 1000; break;
                 case '-':
                     if (arg[2] == '\0') {
                         ignoreDash = true;
@@ -82,9 +78,9 @@ int main(int, char **argv) try {
         }
         files.push_back(arg);
     }
-    for (const auto file : files) {
+    for (auto const file : files) {
         try {
-            const auto fsize = std::filesystem::file_size(file);
+            auto const fsize = std::filesystem::file_size(file);
             if (filename) {
                 std::cout << file << ": ";
             }
@@ -95,12 +91,18 @@ int main(int, char **argv) try {
             }
             std::putc('\n', stdout);
 
-        } catch (const std::filesystem::filesystem_error &err) { std::cerr << err.what() << '\n'; }
+        } catch (std::filesystem::filesystem_error const &err) {
+            std::cerr << err.what() << '\n';
+        }
     }
-} catch (const std::exception &err) {
+
+} catch (std::exception const &err) {
+
     std::cerr << "unexpected error: " << err.what() << '\n';
     return -1;
+
 } catch (...) {
+
     std::cerr << "unknown error\n";
     return -1;
 }

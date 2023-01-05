@@ -1,12 +1,13 @@
+#include <string_view>
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <optional>
-#include <string_view>
 namespace fs = std::filesystem;
 
 #ifndef VERSION
-#define VERSION "unknonw"
+#    define VERSION "unknonw"
 #endif
 
 std::optional<fs::path> getShabang(const fs::path path) {
@@ -18,11 +19,11 @@ std::optional<fs::path> getShabang(const fs::path path) {
     return fs::path {std::begin(shebang) + 3, std::end(shebang)};
 }
 
-void print(const char *type, const fs::path &path) {
+void print(char const *type, fs::path const &path) {
     std::cout << std::setw(7) << std::right << type << ' ' << std::right << path.c_str() << '\n';
 }
 
-int main(int argc, const char **argv) {
+int main(int argc, char const **argv) {
     if (argc != 1) {
         if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'v') {
             std::cout << argv[0] << ": v" VERSION << '\n';
@@ -32,9 +33,9 @@ int main(int argc, const char **argv) {
         return 1;
     }
 
-    for (const auto &entry : fs::directory_iterator(".")) {
+    for (auto const &entry : fs::directory_iterator(".")) {
         if (entry.is_regular_file()) {
-            if (const auto shebang = getShabang(entry.path())) {
+            if (auto const shebang = getShabang(entry.path())) {
                 print(shebang->filename().c_str(), entry.path().filename());
                 continue;
             }
