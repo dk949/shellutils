@@ -25,7 +25,7 @@ Note: make will strip extensions when installing to executables will not have
 * curl
   * needed for `dict.sh`
 * bat
-  * needed for `wbat`
+  * needed for `wbat` and `obat`
 * grub
   * needed for `update-grub.sh`
 * xprop
@@ -156,6 +156,13 @@ Note: make will strip extensions when installing to executables will not have
 
 * takes a path and creates an empty file at that location
 * creates all intermediate directories if they don't exist
+
+#### obat
+
+* takes a path and an optional list of options (same ones as `objdump`)
+* uses `bat` to display the disassembled file.
+  * defaults to intel syntax
+  * defaults to only `.text` data.
 
 #### out
 
