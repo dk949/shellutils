@@ -182,6 +182,12 @@ Note: make will strip extensions when installing to executables will not have
     commands it would have ran if -t was not supplied.
   * -t can be used 1st or last, but not between the other 2 parameters.
 
+
+#### rmfile
+
+* takes name of a file
+* analogous to rmdir in that it will only delete empty files
+
 #### run
 
 * closes the current terminal and launches a program that was supplied as the
