@@ -21,7 +21,7 @@ helpText() {
         KEEP=""
         REMOVE=""
         if [ -z "$1" ]; then
-            echo "Usage: $(basename $0) [KEEP] [REMOVE]"
+            echo "Usage: $(basename "$0") [KEEP] [REMOVE]"
             exit 1
         fi
 

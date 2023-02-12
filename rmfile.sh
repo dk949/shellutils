@@ -12,4 +12,4 @@ die()  {
 
 [ -s "$1" ] && die "File \`$1\` is not empty"
 
-rm $1
+rm "$1"

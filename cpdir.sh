@@ -13,4 +13,5 @@ cd "$DEST" || exit 1
 
 IFS="
 "
+#shellcheck disable=SC2086 # Need to make all the directories not one with spaces
 mkdir $DIRLIST

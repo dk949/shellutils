@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $# -ne 1 ];  then
-    echo "Usage: $(basename $0) TTY"
+    echo "Usage: $(basename "$0") TTY"
     exit 1
 fi
 # Temporarily change which tty the output goes to (Does not support &, &&, |, ||)

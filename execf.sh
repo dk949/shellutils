@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $# -lt 1 ]; then
-    echo "Usage $(basename $0) DIR CMD"
+    echo "Usage $(basename "$0") DIR CMD"
     exit 1
 fi
 if ! [ -d "$1" ]; then

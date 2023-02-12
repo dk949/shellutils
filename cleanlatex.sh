@@ -6,7 +6,7 @@ while [ -n "$1" ]; do # loop over all arguments
     # Check which arg was passed
     case "$1" in
         -h|--help)
-            echo "Usage: $(basename $0) [-p|--pdf -t|--test] BASENAME"
+            echo "Usage: $(basename "$0") [-p|--pdf -t|--test] BASENAME"
             exit 0
             ;;
 
@@ -49,5 +49,5 @@ cmd() {
 }
 
  for ext in $EXT_LIST; do
-    cmd rm ${BASENAME}.${ext} -f
+    cmd rm "${BASENAME}.${ext}" -f
  done

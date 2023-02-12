@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $# -ne 2 ]; then
-    echo "Usage: $(basename $0) FROM TO"
+    echo "Usage: $(basename "$0") FROM TO"
     exit 1
 fi
 
