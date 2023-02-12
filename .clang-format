@@ -165,7 +165,8 @@ StatementAttributeLikeMacros: []
 # clang-format 13
 AlignArrayOfStructures: Right
 EmptyLineAfterAccessModifier: Leave
-IfMacros: []
+IfMacros:
+    - IF_ARG
 IndentAccessModifiers: false
 LambdaBodyIndentation: OuterScope
 PPIndentWidth: -1 # NOTE: same as IndentWidth
