@@ -78,7 +78,7 @@ void printNum(std::string const &input, int precision, bool sci, int numPerLine,
 
 enum class Type { Float, Int, Uint };
 
-int main(int argc, char const **argv) {
+int main(int, char const **argv) {
     int precision = 7;
     bool sci = true;
     int numPerLine = 4;
@@ -158,10 +158,10 @@ int main(int argc, char const **argv) {
 
         } else {
             switch (bytes) {
-                case 1: printNum<unsigned char>(input, precision, sci, numPerLine, big);
-                case 2: printNum<unsigned short>(input, precision, sci, numPerLine, big);
-                case 4: printNum<unsigned int>(input, precision, sci, numPerLine, big);
-                case 8: printNum<unsigned long>(input, precision, sci, numPerLine, big);
+                case 1: printNum<unsigned char>(input, precision, sci, numPerLine, big); break;
+                case 2: printNum<unsigned short>(input, precision, sci, numPerLine, big); break;
+                case 4: printNum<unsigned int>(input, precision, sci, numPerLine, big); break;
+                case 8: printNum<unsigned long>(input, precision, sci, numPerLine, big); break;
                 default: std::cerr << "unsupported integer number with " << bytes << " bytes\n"; return 2;
             }
         }
