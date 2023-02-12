@@ -1,17 +1,21 @@
 # versions
-FLOATDUMP_VERSION=\"1.4.0\"
-COLORCHECK_VERSION=\"2.3.0\"
-LSTYPE_VERSION=\"1.1.0\"
-FSIZE_VERSION=\"1.2.1\"
-ENVDUMP_VERSION=\"1.0.1\"
-SOBROWSER_VERSION=\"0.1.0\"
+floatdump_version  = \"1.4.0\"
+colorcheck_version = \"2.3.0\"
+lstype_version     = \"1.1.0\"
+fsize_version      = \"1.2.1\"
+envdump_version    = \"1.0.1\"
+sobrowser_version  = \"0.1.0\"
 
 # dirs
-DESTDIR=$(HOME)/.local
-PREFIX=
+PREFIX  = $(HOME)/.local
 
+# flags
+COMMON_FLAGS = -O3 -Wall -Wextra -Werror
+CFLAGS       = $(COMMON_FLAGS) -std=c11
+CXXFLAGS     = $(COMMON_FLAGS) -std=c++20
 
 # compiler
-CC?=/usr/bin/cc
-CXX?=/usr/bin/c++
-STRP=/usr/bin/strip
+CC   ?= cc
+CXX  ?= c++
+STRP ?= strip
+
