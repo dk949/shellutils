@@ -5,34 +5,39 @@ all: \
 	colorcheck.out \
 	lstype.out \
 	fsize.out \
+	sobrowser.out \
 	envdump.out
 
 clean:
 	rm -f floatdump.out
 	rm -f colorcheck.out
 	rm -f lstype.out
+	rm -f fsize.out
 	rm -f envdump.out
 
+sobrowser.out: sobrowser.cpp
+	$(CXX) -o $@ $< -std=c++20 -O3 -DVERSION=$(SOBROWSER_VERSION)
+	$(STRP) $@
 
 floatdump.out: floatdump.cpp
 	$(CXX) -o floatdump.out floatdump.cpp -std=c++20 -O3 -DVERSION=$(FLOATDUMP_VERSION)
-	$(STRP) floatdump.out
+	$(STRP) $@
 
 colorcheck.out: colorcheck.cpp
 	$(CXX) -o colorcheck.out colorcheck.cpp -std=c++20 -O3 -DVERSION=$(COLORCHECK_VERSION)
-	$(STRP) colorcheck.out
+	$(STRP) $@
 
 lstype.out: lstype.cpp
 	$(CXX) -o lstype.out lstype.cpp -std=c++20 -O3 -DVERSION=$(LSTYPE_VERSION)
-	$(STRP) lstype.out
+	$(STRP) $@
 
 fsize.out: fsize.cpp
 	$(CXX) -o fsize.out fsize.cpp -std=c++20 -O3 -DVERSION=$(FSIZE_VERSION)
-	$(STRP) fsize.out
+	$(STRP) $@
 
 envdump.out: envdump.c
 	$(CC) -o envdump.out envdump.c -std=c11 -O3 -DVERSION=$(ENVDUMP_VERSION)
-	$(STRP) envdump.out
+	$(STRP) $@
 
 
 
