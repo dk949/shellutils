@@ -7,7 +7,8 @@ envdump_version    = \"1.0.1\"
 sobrowser_version  = \"0.1.0\"
 
 # dirs
-PREFIX  = $(HOME)/.local
+PREFIX  ?=
+DESTDIR ?= $(HOME)/.local
 
 # flags
 COMMON_FLAGS = -O3 -Wall -Wextra -Werror
@@ -18,4 +19,3 @@ CXXFLAGS     = $(COMMON_FLAGS) -std=c++20
 CC   ?= cc
 CXX  ?= c++
 STRP ?= strip
-

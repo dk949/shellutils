@@ -6,6 +6,9 @@ EXE     = $(CXX_SRC:%.cpp=%.out) $(C_SRC:%.c=%.out)
 
 .SUFFIXES:
 
+
+DIR=$(DESTDIR)$(PREFIX)/bin
+
 all: $(EXE)
 
 clean:
@@ -20,12 +23,12 @@ clean:
 	$(STRP) $@
 
 install: all
-	$(foreach file, $(wildcard *.sh),install $(file) $(PREFIX)/bin/$(basename $(file));)
-	$(foreach file, $(wildcard *.out),install $(file) $(PREFIX)/bin/$(basename $(file));)
+	$(foreach file, $(wildcard *.sh),install $(file) $(DIR)/$(basename $(file));)
+	$(foreach file, $(wildcard *.out),install $(file) $(DIR)/$(basename $(file));)
 
 uninstall:
-	$(foreach file, $(wildcard *.sh), rm -f $(PREFIX)/bin/$(basename $(file));)
-	$(foreach file, $(wildcard *.cpp), rm -f $(PREFIX)/bin/$(basename $(file));)
+	$(foreach file, $(wildcard *.sh), rm -f $(DIR)/$(basename $(file));)
+	$(foreach file, $(wildcard *.cpp), rm -f $(DIR)/$(basename $(file));)
 
 
 .PHONY: all clean install uninstall
