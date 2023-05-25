@@ -1,10 +1,5 @@
 # versions
-floatdump_version  = \"1.4.0\"
-colorcheck_version = \"2.3.0\"
-lstype_version     = \"1.1.0\"
-fsize_version      = \"1.2.1\"
-envdump_version    = \"1.0.1\"
-sobrowser_version  = \"0.1.0\"
+VERSION = \"$(shell git describe)\"
 
 # dirs
 PREFIX  ?=

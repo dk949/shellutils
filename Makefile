@@ -15,11 +15,11 @@ clean:
 	rm -f $(EXE)
 
 %.out: %.cpp
-	$(CXX) $< $(CXXFLAGS) -DVERSION=$($(basename $@)_version) -o $@
+	$(CXX) $< $(CXXFLAGS) -DVERSION=$(VERSION) -o $@
 	$(STRP) $@
 
 %.out: %.c
-	$(CC) $< $(CFLAGS) -DVERSION=$($(basename $@)_version) -o $@
+	$(CC) $< $(CFLAGS) -DVERSION=$(VERSION) -o $@
 	$(STRP) $@
 
 install: all
