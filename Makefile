@@ -23,6 +23,7 @@ clean:
 	$(STRP) $@
 
 install: all
+	mkdir -p $(DIR)
 	$(foreach file, $(wildcard *.sh),install $(file) $(DIR)/$(basename $(file));)
 	$(foreach file, $(wildcard *.out),install $(file) $(DIR)/$(basename $(file));)
 
