@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "run is deprecated and will soon be removed"
 if [ $# -ne 1 ];then
     echo "Usage: $(basename "$0") PROGRAM"
     exit 1
