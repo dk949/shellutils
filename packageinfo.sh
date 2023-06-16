@@ -10,5 +10,5 @@ PACK="$1"
 
 
 echo "$PACK"
-yay -Qi "$PACK" | awk  '/Required By/'
+yay -Qi "$PACK" |  grep -E '(Required By)|(Description)'
 pactree -r "$PACK"
