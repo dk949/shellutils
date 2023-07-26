@@ -30,6 +30,8 @@ Note: make will strip extensions when installing to executables will not have
   * needed for `update-grub.sh`
 * xprop
   * needed for `wminfo.sh`
+* pdftotext
+  * needed for `pdfcounter.sh`
 
 ### List of Scripts and what they do
 
@@ -169,6 +171,12 @@ Note: make will strip extensions when installing to executables will not have
 * takes tty number as the first argument and a command as the second.
 * displays the output from the command to the specified tty.
 * tty number can be found by running `tty`.
+
+#### pdfcounter
+
+* Takes in a name of a pdf document
+* Outputs number of words in the pdf
+* Use `-s` to output just the number
 
 #### rmextdup
 
