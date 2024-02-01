@@ -1,41 +1,131 @@
 ---
+# Alias checks disabled
+#   bugprone-narrowing-conversions                            -> cppcoreguidelines-narrowing-conversions
+#   cppcoreguidelines-avoid-c-arrays                          -> modernize-avoid-c-arrays
+#   cppcoreguidelines-avoid-magic-numbers                     -> readability-magic-numbers
+#   cppcoreguidelines-c-copy-assignment-signature             -> misc-unconventional-assign-operator
+#   cppcoreguidelines-explicit-virtual-functions              -> modernize-use-override
+#   cppcoreguidelines-macro-to-enum                           -> modernize-macro-to-enum
+#   cppcoreguidelines-noexcept-destructor                     -> performance-noexcept-destructor
+#   cppcoreguidelines-noexcept-move-operations                -> performance-noexcept-move-constructor
+#   cppcoreguidelines-noexcept-swap                           -> performance-noexcept-swap
+#   cppcoreguidelines-non-private-member-variables-in-classes -> misc-non-private-member-variables-in-classes
+#   cppcoreguidelines-use-default-member-init                 -> modernize-use-default-member-init
+
+# Checks disabled for performance (reenabled with ENABLE_CLANG_TIDY_FULL)
+#   bugprone-infinite-loop
+#   bugprone-reserved-identifier
+#   bugprone-stringview-nullptr
+#   bugprone-suspicious-string-compare
+#   bugprone-use-after-move
+#   cppcoreguidelines-owning-memory
+#   misc-confusable-identifiers
+#   misc-const-correctness
+#   misc-definitions-in-headers
+#   misc-unused-alias-decls
+#   misc-unused-using-decls
+#   modernize-macro-to-enum
+#   readability-container-size-empty
+#   readability-identifier-naming
+#   readability-non-const-parameter
+#   readability-uppercase-literal-suffix
+
+
+
+
+# Checks disabled
+#   bugprone-bool-pointer-implicit-conversion              # Nothing wrong with if(ptr) ...
+#   cppcoreguidelines-macro-usage                          # Sometimes macros are useful
+#   google-build-namespaces                                # Not sure why anonymous namespaces are banned
+#   google-readability-avoid-underscore-in-googletest-name # Don't use google test
+#   google-runtime-int                                     # This may get reenabled at some point
+#   google-upgrade-googletest-case                         # Don't use google test
+#   misc-no-recursion                                      # Sometimes recursion is OK
+#   misc-non-private-member-variables-in-classes           # Too many false positives
+#   misc-use-anonymous-namespace                           # Not sure why anonymous namespaces are mandatory
+#   modernize-use-trailing-return-type                     # Very hard to keep this consistent
+#   readability-avoid-return-with-void-value               # Why?
+#   readability-braces-around-statements                   # Non-issue when using a formatter
+#   readability-else-after-return                          # Also why?
+#   readability-identifier-length                          # Sometimes short identifiers are OK
+#   readability-named-parameter                            # Some parameters don't need names
+#   readability-redundant-access-specifiers                # They can be used to subdivide a class declaration
+#   readability-static-accessed-through-instance           # Nothing wrong with this
+
 Checks:
   'boost-use-to-string,
   bugprone-*,
   -bugprone-bool-pointer-implicit-conversion,
-  cert-*,
-  clang-analyzer-*,
-  -clang-analyzer-alpha*,
-  -clang-analyzer-webkit*,
-  -clang-analyzer-fuchsia*,
+  -bugprone-infinite-loop,
+  -bugprone-narrowing-conversions,
+  -bugprone-reserved-identifier,
+  -bugprone-stringview-nullptr,
+  -bugprone-suspicious-string-compare,
+  -bugprone-use-after-move,
+  cert-dcl50-cpp,
+  cert-dcl58-cpp,
+  cert-env33-c,
+  cert-err33-c,
+  cert-err34-c,
+  cert-err52-cpp,
+  cert-err58-cpp,
+  cert-err60-cpp,
+  cert-flp30-c,
+  cert-mem57-cpp,
+  cert-msc50-cpp,
+  cert-msc51-cpp,
+  cert-oop57-cpp,
+  cert-oop58-cpp,
   concurrency-*,
   cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-c-arrays,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-c-copy-assignment-signature,
+  -cppcoreguidelines-explicit-virtual-functions,
+  -cppcoreguidelines-macro-to-enum,
   -cppcoreguidelines-macro-usage,
+  -cppcoreguidelines-noexcept-destructor,
+  -cppcoreguidelines-noexcept-move-operations,
+  -cppcoreguidelines-noexcept-swap,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-use-default-member-init,
   google-*,
-  -google-readability-braces-around-statements,
   -google-build-namespaces,
-  hicpp-*,
-  -hicpp-braces-around-statements,
-  -hicpp-multiway-paths-covered,
-  -hicpp-named-parameter,
+  -google-readability-avoid-underscore-in-googletest-name,
+  -google-readability-braces-around-statements,
+  -google-runtime-int,
+  -google-upgrade-googletest-case,
+  hicpp-ignored-remove-result,
+  hicpp-no-assembler,
+  hicpp-signed-bitwise,
   llvm-namespace-comment,
   misc-*,
+  -misc-unused-using-decls,
   -misc-non-private-member-variables-in-classes,
   -misc-unused-alias-decls,
   -misc-no-recursion,
   -misc-use-anonymous-namespace,
+  -misc-const-correctness,
+  -misc-confusable-identifiers,
+  -misc-definitions-in-headers,
   modernize-*,
+  -modernize-macro-to-enum,
   -modernize-use-trailing-return-type,
   performance-*,
   portability-*,
   readability-*,
   -readability-avoid-return-with-void-value,
   -readability-braces-around-statements,
+  -readability-container-size-empty,
   -readability-else-after-return,
   -readability-identifier-length,
+  -readability-identifier-naming,
   -readability-named-parameter,
+  -readability-non-const-parameter,
   -readability-redundant-access-specifiers,
-  -readability-static-accessed-through-instance
+  -readability-static-accessed-through-instance,
+  -readability-uppercase-literal-suffix
   '
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
