@@ -18,7 +18,7 @@ shift
 
 while true; do
     ___wait_For_file_name=$(inotifywait -e move_self --format '%w' "$file" 2>/dev/null)
-    printf '\033[2J'
+    printf '\033[2J\033[%sT' "$LINES"
     echo '________________________________________________________________________________';
     echo "$___wait_For_file_name" | xargs "$@"
     unset ___wait_For_file_name
