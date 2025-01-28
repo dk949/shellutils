@@ -40,4 +40,4 @@ set +m
 cmd="sh -c cd $dir;$tcmd"
 
 eval nohup "$cmd" 1>/dev/null 2>/dev/null </dev/null &
-[ -n "$kill" ] && kill "$tpid"
+[ -n "$kill" ] && kill "$tpid" || :
