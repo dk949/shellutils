@@ -23,10 +23,11 @@ help() {
 }
 
 cache() {
-    [ -z "$___CACHE_DIR" ] && die "could not locate cache directory" || true
+    [ -z "$___CACHE_DIR" ] && die "could not locate cache directory"
     ___LICENSES_DIR="$___CACHE_DIR/LICENSES"
-    [ ! -d "$___LICENSES_DIR" ] \
-        && git clone "$___LICENSES_URL" "$___LICENSES_DIR" || true
+    if [ ! -d "$___LICENSES_DIR" ]; then
+        git clone "$___LICENSES_URL" "$___LICENSES_DIR"
+    fi
 }
 
 
@@ -40,8 +41,7 @@ update() {
     git -C "$___LICENSES_DIR" pull
 }
 
-[ $# -ne 1 ] \
-    && die "$(help)" || true
+[ $# -ne 1 ] && die "$(help)"
 
 case $1 in
     "-l"|"--list")
@@ -68,15 +68,12 @@ cache
 
 
 ___USER=$(git config user.name)
-[ -z "$___USER" ] && ___USER="$USER" || true
-[ -z "$___USER" ] && die "could not determine username" || true
+[ -z "$___USER" ] && ___USER="$USER"
+[ -z "$___USER" ] && die "could not determine username"
 
 
-[ -f "LICENSE" ] \
-    && die '"LICENSE" already exists. Back it up and try again.' || true
+[ -f "LICENSE" ] && die '"LICENSE" already exists. Back it up and try again.'
 
-
-[ ! -f "$___LICENSES_DIR/$1" ] \
-    && die "No such license $1\nAvailable licenses are:\n\n$(list)" || true
+[ ! -f "$___LICENSES_DIR/$1" ] && die "No such license $1\nAvailable licenses are:\n\n$(list)"
 
 sed "s/=YEAR=/$___YEAR/;s/=AUTHOR=/$___USER/" < "$___LICENSES_DIR/$1"  > ./LICENSE
