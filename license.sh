@@ -37,7 +37,7 @@ list() {
 
 update() {
     cache
-    git pull "$___LICENSES_DIR"
+    git -C "$___LICENSES_DIR" pull
 }
 
 [ $# -ne 1 ] \
