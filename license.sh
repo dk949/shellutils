@@ -6,7 +6,8 @@ cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"
 year=$(date +'%Y')
 
 die() {
-    printf "%s" "$*"
+    #shellcheck disable=SC2059 # all args are forwarded to printf
+    printf "$@"
     echo
     exit 1
 }
@@ -40,7 +41,7 @@ update() {
     git -C "$license_dir" pull
 }
 
-[ $# -ne 1 ] && die "$(help)"
+[ $# -ne 1 ] && die "%s" "$(help)"
 
 case $1 in
     "-l"|"--list")
@@ -73,6 +74,9 @@ ___USER=$(git config user.name)
 
 [ -f "LICENSE" ] && die '"LICENSE" already exists. Back it up and try again.'
 
-[ ! -f "$license_dir/$1" ] && die "No such license $1\nAvailable licenses are:\n\n$(list)"
+[ ! -f "$license_dir/$1" ] && die "No such license %s
+Available licenses are:
+
+%s" "$1" "$(list)"
 
 sed "s/=YEAR=/$year/;s/=AUTHOR=/$___USER/" < "$license_dir/$1"  > ./LICENSE
