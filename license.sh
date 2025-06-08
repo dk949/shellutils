@@ -1,13 +1,12 @@
 #!/bin/sh
 set -e
 
-___LICENSES_URL="https://github.com/dk949/LICENSES.git"
-___CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}"
-___YEAR=$(date +'%Y')
+license_url="https://github.com/dk949/LICENSES.git"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"
+year=$(date +'%Y')
 
 die() {
-    # shellcheck disable=2059
-    printf "$*"
+    printf "%s" "$*"
     echo
     exit 1
 }
@@ -23,22 +22,22 @@ help() {
 }
 
 cache() {
-    [ -z "$___CACHE_DIR" ] && die "could not locate cache directory"
-    ___LICENSES_DIR="$___CACHE_DIR/LICENSES"
-    if [ ! -d "$___LICENSES_DIR" ]; then
-        git clone "$___LICENSES_URL" "$___LICENSES_DIR"
+    [ -z "$cache_dir" ] && die "could not locate cache directory"
+    license_dir="$cache_dir/LICENSES"
+    if [ ! -d "$license_dir" ]; then
+        git clone "$license_url" "$license_dir"
     fi
 }
 
 
 list() {
     cache
-    \find "$___LICENSES_DIR" -maxdepth 1 -type f -exec "basename" "{}" ";"
+    \find "$license_dir" -maxdepth 1 -type f -exec "basename" "{}" ";"
 }
 
 update() {
     cache
-    git -C "$___LICENSES_DIR" pull
+    git -C "$license_dir" pull
 }
 
 [ $# -ne 1 ] && die "$(help)"
@@ -74,6 +73,6 @@ ___USER=$(git config user.name)
 
 [ -f "LICENSE" ] && die '"LICENSE" already exists. Back it up and try again.'
 
-[ ! -f "$___LICENSES_DIR/$1" ] && die "No such license $1\nAvailable licenses are:\n\n$(list)"
+[ ! -f "$license_dir/$1" ] && die "No such license $1\nAvailable licenses are:\n\n$(list)"
 
-sed "s/=YEAR=/$___YEAR/;s/=AUTHOR=/$___USER/" < "$___LICENSES_DIR/$1"  > ./LICENSE
+sed "s/=YEAR=/$year/;s/=AUTHOR=/$___USER/" < "$license_dir/$1"  > ./LICENSE
