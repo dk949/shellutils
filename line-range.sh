@@ -30,8 +30,21 @@ fname=$2
 [ -z "$line_range" ] && die "line range required"
 sed_range=$(echo "$line_range" | awk -F: '
 {   line_count = NR
-    if ($1) from = +$1; else from = 1
-    if ($2) to = +$2; else to = "$" }
+    if ($1) {
+        if($1 ~ /^[-+]?[0-9]+$/)
+            from = +$1
+        else
+            from = 0
+    } else
+        from = 1
+    if ($2){
+        if($2 ~ /^[-+]?[0-9]+$/)
+            to = +$2
+        else
+            to = 0
+    } else
+        to = "$"
+}
 END { err_start = "Line range error: "
     if (line_count != 1) {
         print err_start "Unexpected new line"
