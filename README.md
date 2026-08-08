@@ -32,8 +32,21 @@ Note: make will strip extensions when installing to executables will not have
   * needed for `wminfo.sh`
 * pdftotext
   * needed for `pdfcounter.sh`
+* claude, jq
+  * needed for `ask-claude.sh`
 
 ### List of Scripts and what they do
+
+#### ask-claude
+
+* takes a question as its arguments and prints the answer
+  * E.g. `ask-claude how do I make find print null separated paths`
+* intended for quick questions about the use of CLI tools
+* answers are terse and assume familiarity with the usual CLI conventions
+* the question is not allowed to affect the machine it is asked on: claude is
+  run with no tools, no memories and no access to the current project
+* questions about the current project, or anything else out of scope, are
+  rejected with `out of scope` on stderr and an exit status of 1
 
 #### bak
 
