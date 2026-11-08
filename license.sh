@@ -67,7 +67,7 @@ esac
 cache
 
 
-___USER=$(git config user.name)
+___USER=$(git config user.name || :)
 [ -z "$___USER" ] && ___USER="$USER"
 [ -z "$___USER" ] && die "could not determine username"
 

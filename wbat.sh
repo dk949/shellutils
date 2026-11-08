@@ -5,6 +5,6 @@ if [ $# -lt 1 ]; then
 fi
 
 while [ $# -ne 0 ]; do
-    bat "$(which "$1")" || exit 1
+    bat "$(command -v "$1")" || exit 1
     shift
 done

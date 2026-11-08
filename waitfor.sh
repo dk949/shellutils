@@ -1,6 +1,10 @@
 #!/bin/sh
+case $(uname) in
+    Linux) ;;
+    *) echo "$(basename "$0"): only works on Linux" >&2; exit 1 ;;
+esac
 
-if echo " $* " | grep -qE "( -h )|( --help )"; then
+if [ "$1" = -h ] || [ "$1" = --help ]; then
     echo "Usage: $(basename "$0") FILE CMD...
 
     -h, --help    ptint this message and exit
@@ -13,6 +17,7 @@ fi
 file=$1
 [ -z "$file" ] && { echo "File name expected see -h or --help for help"; exit 1; }
 [ -z "$2" ] && { echo "Command expected see -h or --help for help"; exit 1; }
+command -v inotifywait >/dev/null || { echo "$(basename "$0"): inotifywait is required (inotify-tools)" >&2; exit 1; }
 shift
 
 

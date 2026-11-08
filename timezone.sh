@@ -1,4 +1,8 @@
 #!/bin/sh
+case $(uname) in
+    Linux) ;;
+    *) echo "$(basename "$0"): only works on Linux" >&2; exit 1 ;;
+esac
 set -e
 
 die() {

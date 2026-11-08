@@ -7,14 +7,17 @@ fi
 
 # Save curernt tty
 TTY=$(tty)
-TTY=${TTY##*/}
 
 # start directing all output from this tty to the first argument to the function
-exec 1>/dev/pts/"$1"
+# (Linux: /dev/pts/N, macOS: /dev/ttysNNN, the number as `tty` prints it)
+case $(uname) in
+    Darwin) exec 1>/dev/ttys"$1" ;;
+    *) exec 1>/dev/pts/"$1" ;;
+esac
 
 shift
 # execute the rest of the arguments
 eval "$*"
 
 # return to outputing to the current tty
-exec 1>/dev/pts/"$TTY"
+exec 1>"$TTY"

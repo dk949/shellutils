@@ -10,8 +10,9 @@ EOF
     exit "${1:-0}"
 }
 
-echo " $* " | grep -qE "( -h )|( --help )" && usage 0
+case $1 in -h|--help) usage 0 ;; esac
 [ $# -eq 0 ] && usage 1
+command -v claude >/dev/null || { echo "$(basename "$0"): claude is required" >&2; exit 1; }
 command -v jq >/dev/null || { echo "$(basename "$0"): jq is required" >&2; exit 1; }
 
 prompt='You answer one-off questions typed at a terminal, almost always about how to use a CLI tool.

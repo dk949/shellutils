@@ -1,3 +1,4 @@
+#!/bin/sh
 help() {
     echo "Usage: $(basename "$0") [-s] FILE
 
@@ -27,8 +28,10 @@ while [ $# -ne 0 ]; do
 done
 
 [ -z "$FILE" ] && { help; exit 1; }
+command -v pdftotext >/dev/null || { echo "$(basename "$0"): pdftotext is required" >&2; exit 1; }
 
-COUNT=$(pdftotext "$FILE" - | wc -w)
+# BSD wc pads the count with spaces
+COUNT=$(pdftotext "$FILE" - | wc -w | tr -d ' ')
 if [ -n "$SIMPLE" ]; then
     echo "$COUNT"
 else

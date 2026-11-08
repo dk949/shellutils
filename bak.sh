@@ -49,9 +49,9 @@ while [ $# -ne 0 ]; do
         -f|--force)
             skip_flags "$1" || force=1; shift;;
         -F|--FORCE)
-            skip_flags "$1" || force=1; FORCE=1 shift;;
+            skip_flags "$1" || { force=1; FORCE=1; }; shift;;
         --no-force)
-            skip_flags "$1" || force=; FORCE=; shift;;
+            skip_flags "$1" || { force=; FORCE=; }; shift;;
         --)
             skip_flags "$1" || need_skip_flags=1; shift;;
         -*)

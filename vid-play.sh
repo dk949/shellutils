@@ -1,7 +1,8 @@
 #!/bin/sh
 
 if [ -z "$1" ];then
-    echo "USAGE: play FILE SPEED"
+    echo "USAGE: $(basename "$0") FILE SPEED"
+    exit 1
 fi
 
 if [ -z "$2" ]; then

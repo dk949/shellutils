@@ -20,8 +20,6 @@ Note: make will strip extensions when installing to executables will not have
   * needed for `*.cpp`
 * clang-tidy
   * needed for `ctfix.sh`
-* gpg, tar
-  * needed for `decryptdir.sh` and `encryptdir.sh`
 * curl
   * needed for `dict.sh`
 * bat
@@ -34,6 +32,8 @@ Note: make will strip extensions when installing to executables will not have
   * needed for `pdfcounter.sh`
 * claude, jq
   * needed for `ask-claude.sh`
+* python3
+  * needed for `tocgen.sh`
 
 ### List of Scripts and what they do
 
@@ -54,44 +54,19 @@ Note: make will strip extensions when installing to executables will not have
   argument.
 * backed up file is called `ORIGINAL_NAME.bak`
 
-#### cleanlatex
-
-* removes `aux` `bcf` and `log` files produced by pdflatex for a specific target
-* can remove the pdf too
-
 #### colorcheck
 
 * checks color capabilities of a terminal by printing all colors
 
-#### cpdir
-
-* copy directory structure without the files
-
 #### ctfix
 
 * fixes c/c++ files with clang-tidy
-
-#### decryptdir
-
-* decrypts the tarball, then decompresses it.
-* deletes the encrypted tar and the unencrypted tar.
 
 #### dict
 
 * takes 1 argument
 * sends that argument to <dict://dict.org>
 * prints the formatted result.
-
-#### double
-
-* takes 1 argument.
-* closes the current terminal then opens 2 new terminals to the directory
-  specified by the argument.
-
-#### encryptdir
-
-* creates a tarball from the directory
-* encrypts the tarball, deletes the tar ball and the original directory.
 
 #### envdump
 
@@ -101,16 +76,6 @@ Note: make will strip extensions when installing to executables will not have
 * NULL can be used to separate variables instead of newline with `-0`
 * Comma (,) can be used to separate VARIABLE and VALUE with `-c` (or use with
   csv)
-
-#### execf
-
-* stands for execute from.
-* it takes a path (relative or absolute) as the first parameter, and a command
-  as the second.
-* then the command is executed as if current working directory was the one given
-  as the first parameter.
-  * E.g. `execf ~/ ls` will list the contents of the home directory (yes, just
-    like `ls ~/` would).
 
 #### extrename
 
@@ -128,10 +93,6 @@ Note: make will strip extensions when installing to executables will not have
 * converts binary data to some number format
   * float by default
   * use `floatdump -h` for details
-
-#### forever
-
-* will rerun a command forever
 
 #### fsize
 
@@ -184,25 +145,13 @@ Note: make will strip extensions when installing to executables will not have
 * takes tty number as the first argument and a command as the second.
 * displays the output from the command to the specified tty.
 * tty number can be found by running `tty`.
+  * on macOS pass it as `tty` prints it, e.g. `003` for `/dev/ttys003`.
 
 #### pdfcounter
 
 * Takes in a name of a pdf document
 * Outputs number of words in the pdf
 * Use `-s` to output just the number
-
-#### rmextdup
-
-* remove extension duplicates.
-* finds files with the same name, but different extension
-* removes all files with the unwanted extension.
-* takes 2 arguments with an optional `-t|--test` flag.
-  * first argument is the extension to keep (without the dot)
-  * the second one is extension to remove.
-  * -t or --test will not remove any files, instead it will print all of the rm
-    commands it would have ran if -t was not supplied.
-  * -t can be used 1st or last, but not between the other 2 parameters.
-
 
 #### rmfile
 
@@ -248,3 +197,7 @@ make install
 Note: This is the default method and it assumes that $HOME/.local/bin exists (it
 will be created if not) and is on PATH. If you wish to install to a different
 directory change `DESTDIR` and/or `PREFIX` variables in config.mk.
+
+Note: on macOS `make`, the c++ compiler, `git` and `strip` come with the Xcode
+Command Line Tools. Install them with `xcode-select --install` before running
+`make install`.

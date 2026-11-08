@@ -157,7 +157,7 @@ int main(int, char **argv) try {
 
 } catch (std::exception const &err) {
 
-    return eprintf<-1>("unexpected error: \n", err.what());
+    return eprintf<-1>("unexpected error: %s\n", err.what());
 } catch (...) {
     return eputs<-1>("unknown error");
 }

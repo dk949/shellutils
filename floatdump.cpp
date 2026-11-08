@@ -6,7 +6,6 @@ static_assert(sizeof(long) == 8, "expected 64 bit long");
 static_assert(sizeof(int) == 4, "expected 32 bit int");
 static_assert(sizeof(short) == 2, "expected 16 bit short");
 static_assert(sizeof(char) == 1, "expected 8 bit char");
-static_assert(sizeof(long double) == 16, "expected 128 bit long double");
 static_assert(sizeof(double) == 8, "expected 64 bit double");
 static_assert(sizeof(float) == 4, "expected 32 bit float");
 #include <cstring>
@@ -144,7 +143,13 @@ int main(int, char const **argv) {
             switch (bytes) {
                 case 4: printNum<float>(input, precision, sci, numPerLine, big); break;
                 case 8: printNum<double>(input, precision, sci, numPerLine, big); break;
-                case 16: printNum<long double>(input, precision, sci, numPerLine, big); break;
+                case 16:
+                    // long double is only 8 bytes on some platforms (e.g. macOS on Apple Silicon)
+                    if constexpr (sizeof(long double) == 16) {
+                        printNum<long double>(input, precision, sci, numPerLine, big);
+                        break;
+                    }
+                    [[fallthrough]];
                 default: std::cerr << "unsupported floating point number with " << bytes << " bytes\n"; return 2;
             }
         } else if (type == Type::Int) {
